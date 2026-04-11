@@ -1,2 +1,0 @@
-print("TRABAJO DE CAMPO 1)
-print("SEGUNDO AVANCE")

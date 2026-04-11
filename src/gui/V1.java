@@ -1,13 +1,13 @@
 package gui;
 
 import java.awt.EventQueue;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Clases.restaurante;
+import arreglos.ArregloPedidos;
+import clases.Restaurante;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -118,18 +118,18 @@ public class V1 extends JFrame implements ActionListener {
 			contentPane.add(txtS);
 		}
 		{
-			btnPedido = new JButton("Calcular Pedido:");
+			btnPedido = new JButton("Calcular Pedido");
 			btnPedido.addActionListener(this);
 			btnPedido.setBounds(339, 11, 140, 38);
 			contentPane.add(btnPedido);
 		}
 		{
-			btnLimpiar = new JButton("Limpiar pedidos:");
+			btnLimpiar = new JButton("Limpiar pedidos");
 			btnLimpiar.addActionListener(this);
 			btnLimpiar.setBounds(339, 69, 140, 38);
 			contentPane.add(btnLimpiar);
 		}
-
+		
 	}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnLimpiar) {
@@ -139,57 +139,41 @@ public class V1 extends JFrame implements ActionListener {
 			do_btnPedido_actionPerformed(e);
 		}
 	}
-	ArrayList<restaurante> listaPedidos = new ArrayList<>();
-	
-	//Método para obtener el precio según el plato seleccionado
+	ArregloPedidos listaPedidos = new ArregloPedidos();
 	public double obtenerPrecioPlato(int index) {
 		switch (index) {
-	     case 1: return 25.50; // Lomo Saltado
-	     case 2: return 18.00; // Ají de Gallina
-	     case 3: return 22.00; // Arroz con Pollo
+	     case 1: return 25.50; //Lomo Saltado
+	     case 2: return 18.00; //Ají de Gallina
+	     case 3: return 22.00; //Arroz con Pollo
 	     default: return 0.0;
 	    }
 	}
-	
 	protected void do_btnPedido_actionPerformed(ActionEvent e) {
 		try {
-            // Captura de datos desde los JTextField
-            double nPedido = Double.parseDouble(txtPedido.getText());
+            int nPedido = Integer.parseInt(txtPedido.getText());
             double cantidad = Double.parseDouble(txtPlatos.getText());
             String direccion = txtDirección.getText();
             String nombre = txtCliente.getText();
-            
-            // Obtener precio del plato seleccionado en el ComboBox
-            int seleccion = BoxLista.getSelectedIndex();
+            int seleccion = BoxLista.getSelectedIndex(); //Obtener precio del plato seleccionado en el ComboBox
             double precioUnitario = obtenerPrecioPlato(seleccion);
-            
-            // Cálculo del total
             double total = precioUnitario * cantidad;
+
+            Restaurante nuevoPedido = new Restaurante(nPedido, cantidad, nombre, direccion);
+            listaPedidos.Registrar(nuevoPedido);
             
-            // Crear objeto y agregar al arreglo (ArrayList)
-            restaurante nuevoPedido = new restaurante(nPedido, cantidad, nombre, direccion);
-            listaPedidos.add(nuevoPedido);
-            
-            // Mostrar en el JTextArea (el cuadro blanco grande)
             String linea = String.format("Cliente: %s | Total: S/ %.2f\n", nombre, total);
             txtS.append(linea);
-            //txtS.append("Cliente: " + nombre + " | Plato: " + seleccion + "()" + " | Total: S/ " + total + "\n");
-            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Por favor, verifique que los campos  sean correctos.");
         }
 	}
 	
 	protected void do_btnLimpiar_actionPerformed(ActionEvent e) {
-		// Limpiar campos de texto
         txtPedido.setText("");
         txtDirección.setText("");
         txtCliente.setText("");
         txtPlatos.setText("");
-        BoxLista.setSelectedIndex(0);
-        
-        // Opcional: Limpiar el historial visual y el arreglo
         txtS.setText("");
-        listaPedidos.clear(); 
+        BoxLista.setSelectedIndex(0);
 	}
 }

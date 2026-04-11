@@ -1,8 +1,10 @@
-package Clases;
+package clases;
 
-public class restaurante {
-private double pedido,plato;
-public restaurante(double pedido, double plato, String cliente, String direc) {
+public class Restaurante {
+private int pedido;
+private double plato;
+private String cliente, direc;
+public Restaurante(int pedido, double plato, String cliente, String direc) {
 	this.pedido = pedido;
 	this.plato = plato;
 	this.cliente = cliente;
@@ -11,7 +13,7 @@ public restaurante(double pedido, double plato, String cliente, String direc) {
 public double getPedido() {
 	return pedido;
 }
-public void setPedido(double pedido) {
+public void setPedido(int pedido) {
 	this.pedido = pedido;
 }
 public double getPlato() {
@@ -32,6 +34,4 @@ public String getDirec() {
 public void setDirec(String direc) {
 	this.direc = direc;
 }
-private String cliente, direc;
-//tecnicamente esto seria la clase, en los metodos trata de darle valor a los platos que aparecen en el gui.
 }
