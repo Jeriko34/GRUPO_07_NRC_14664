@@ -28,5 +28,14 @@ public Restaurante Buscar(int pedido) {
 public void Eliminar(Restaurante x) {
 		rest.remove(x);
 }
+
 //Para eliminar un pedido completo (o cliente, es lo mismo por ahora).
+public Restaurante BuscarPorCliente(String nombre) {
+    for (int i = 0; i < Tamaño(); i++) {
+        if (Obtener(i).getCliente().equalsIgnoreCase(nombre)) {
+            return Obtener(i);
+        }
+    }
+    return null;
+}
 }

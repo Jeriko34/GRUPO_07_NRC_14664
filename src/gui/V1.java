@@ -120,18 +120,27 @@ public class V1 extends JFrame implements ActionListener {
 		{
 			btnPedido = new JButton("Calcular Pedido");
 			btnPedido.addActionListener(this);
-			btnPedido.setBounds(339, 11, 140, 38);
+			btnPedido.setBounds(292, 8, 120, 29);
 			contentPane.add(btnPedido);
 		}
 		{
 			btnLimpiar = new JButton("Limpiar pedidos");
 			btnLimpiar.addActionListener(this);
-			btnLimpiar.setBounds(339, 69, 140, 38);
+			btnLimpiar.setBounds(292, 48, 120, 29);
 			contentPane.add(btnLimpiar);
+		}
+		{
+			btnBuscar = new JButton("Buscar pedidos");
+			btnBuscar.addActionListener(this);
+			btnBuscar.setBounds(292, 87, 120, 29);
+			contentPane.add(btnBuscar);
 		}
 		
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnBuscar) {
+			do_btnBuscar_actionPerformed(e);
+		}
 		if (e.getSource() == btnLimpiar) {
 			do_btnLimpiar_actionPerformed(e);
 		}
@@ -140,6 +149,7 @@ public class V1 extends JFrame implements ActionListener {
 		}
 	}
 	ArregloPedidos listaPedidos = new ArregloPedidos();
+	private JButton btnBuscar;
 	public double obtenerPrecioPlato(int index) {
 		switch (index) {
 	     case 1: return 25.50; //Lomo Saltado
@@ -175,5 +185,19 @@ public class V1 extends JFrame implements ActionListener {
         txtPlatos.setText("");
         txtS.setText("");
         BoxLista.setSelectedIndex(0);
+	}
+	protected void do_btnBuscar_actionPerformed(ActionEvent e) {
+	String nombreBuscado = txtCliente.getText().trim();
+	if (nombreBuscado.isEmpty()) {
+		JOptionPane.showMessageDialog(null, "Por favor, ingrese el nombre del cliente.");
+		return;
+	}
+	Restaurante encontrado = listaPedidos.BuscarPorCliente(nombreBuscado);
+	if (encontrado != null) {
+		JOptionPane.showMessageDialog(null, "Pedido encontrado:\n" + "N° Pedido: " + (int)encontrado.getPedido() + "\n" + 
+				"Cliente: " + encontrado.getCliente() + "\n" + "Dirección: " + encontrado.getDirec(),"Pedido encontrado",JOptionPane.INFORMATION_MESSAGE);
+	} else {
+		JOptionPane.showMessageDialog(null, "✘ No se encontró ningún pedido para el cliente: " + nombreBuscado, "No encontrado", JOptionPane.WARNING_MESSAGE);
+	}
 	}
 }
