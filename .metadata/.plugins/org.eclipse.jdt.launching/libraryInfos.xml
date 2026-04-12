@@ -24,7 +24,19 @@
             <entry path="null"/>
         </endorsedDirs>
     </libraryInfo>
+    <libraryInfo home="C:\Users\lmrm0\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_21.0.10.v20260205-0638\jre" version="21.0.10"/>
     <libraryInfo home="C:\Users\Cris\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_21.0.10.v20260205-0638\jre" version="21.0.10"/>
+    <libraryInfo home="C:\Users\lmrm0\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_21.0.10.v20260205-0638" version="21.0.10">
+        <bootpath>
+            <entry path="null"/>
+        </bootpath>
+        <extensionDirs>
+            <entry path="null"/>
+        </extensionDirs>
+        <endorsedDirs>
+            <entry path="null"/>
+        </endorsedDirs>
+    </libraryInfo>
     <libraryInfo home="C:\Program Files\Java\jre1.8.0_51" version="1.8.0_51">
         <bootpath>
             <entry path="C:\Program Files\Java\jre1.8.0_51\lib\resources.jar"/>
