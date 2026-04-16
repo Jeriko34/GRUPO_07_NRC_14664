@@ -2,7 +2,7 @@ package clases;
 
 public class Restaurante {
 private int pedido;
-private double plato;
+private double plato, total;
 private String cliente, direc;
 public Restaurante(int pedido, double plato, String cliente, String direc) {
 	this.pedido = pedido;

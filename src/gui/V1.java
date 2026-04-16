@@ -57,7 +57,7 @@ public class V1 extends JFrame implements ActionListener {
 	 */
 	public V1() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 503, 324);
+		setBounds(100, 100, 586, 383);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -114,30 +114,39 @@ public class V1 extends JFrame implements ActionListener {
 		}
 		{
 			txtS = new JTextArea();
-			txtS.setBounds(18, 134, 461, 143);
+			txtS.setBounds(18, 134, 544, 202);
 			contentPane.add(txtS);
 		}
 		{
-			btnPedido = new JButton("Calcular Pedido");
+			btnPedido = new JButton("Calcular pedido");
 			btnPedido.addActionListener(this);
-			btnPedido.setBounds(292, 8, 120, 29);
+			btnPedido.setBounds(266, 8, 136, 29);
 			contentPane.add(btnPedido);
 		}
 		{
 			btnLimpiar = new JButton("Limpiar pedidos");
 			btnLimpiar.addActionListener(this);
-			btnLimpiar.setBounds(292, 48, 120, 29);
+			btnLimpiar.setBounds(266, 48, 136, 29);
 			contentPane.add(btnLimpiar);
 		}
 		{
 			btnBuscar = new JButton("Buscar pedidos");
 			btnBuscar.addActionListener(this);
-			btnBuscar.setBounds(292, 87, 120, 29);
+			btnBuscar.setBounds(266, 87, 136, 29);
 			contentPane.add(btnBuscar);
+		}
+		{
+			btnModificar = new JButton("Modificar dirección");
+			btnModificar.addActionListener(this);
+			btnModificar.setBounds(412, 8, 150, 29);
+			contentPane.add(btnModificar);
 		}
 		
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnModificar) {
+			do_btnNewButton_actionPerformed(e);
+		}
 		if (e.getSource() == btnBuscar) {
 			do_btnBuscar_actionPerformed(e);
 		}
@@ -150,11 +159,13 @@ public class V1 extends JFrame implements ActionListener {
 	}
 	ArregloPedidos listaPedidos = new ArregloPedidos();
 	private JButton btnBuscar;
+	private JButton btnModificar;
 	public double obtenerPrecioPlato(int index) {
 		switch (index) {
-	     case 1: return 25.50; //Lomo Saltado
-	     case 2: return 18.00; //Ají de Gallina
-	     case 3: return 22.00; //Arroz con Pollo
+	     case 1: return 25.50; //Tallarines verdes
+	     case 2: return 18.00; //Lomo saltado
+	     case 3: return 22.00; //Seco de Pollo
+	     case 4: return 17.00; //Locro
 	     default: return 0.0;
 	    }
 	}
@@ -171,7 +182,7 @@ public class V1 extends JFrame implements ActionListener {
             Restaurante nuevoPedido = new Restaurante(nPedido, cantidad, nombre, direccion);
             listaPedidos.Registrar(nuevoPedido);
             
-            String linea = String.format("Cliente: %s | Total: S/ %.2f\n", nombre, total);
+            String linea = String.format("Cliente: %s | Dirección del cliente: %s  |   Total: S/ %.2f\n", nombre, direccion, total);
             txtS.append(linea);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Por favor, verifique que los campos  sean correctos.");
@@ -199,5 +210,19 @@ public class V1 extends JFrame implements ActionListener {
 	} else {
 		JOptionPane.showMessageDialog(null, "✘ No se encontró ningún pedido para el cliente: " + nombreBuscado, "No encontrado", JOptionPane.WARNING_MESSAGE);
 	}
+	}
+	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
+		 String nuevaDirec = txtDirección.getText().trim();
+
+		    listaPedidos.ModificarDireccion(nuevaDirec);
+
+		    txtS.setText("");
+		    for (int i = 0; i < listaPedidos.Tamaño(); i++) {
+		        Restaurante r = listaPedidos.Obtener(i);
+		        double total = obtenerPrecioPlato((int) r.getPlato());
+		        String linea = String.format("Cliente: %s | Dirección del cliente: %s | Total: S/ %.2f\n",
+		            r.getCliente(), r.getDirec(), total);
+		        txtS.append(linea);
+		    }
 	}
 }

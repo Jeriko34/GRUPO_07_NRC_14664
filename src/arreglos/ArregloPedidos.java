@@ -28,8 +28,8 @@ public Restaurante Buscar(int pedido) {
 public void Eliminar(Restaurante x) {
 		rest.remove(x);
 }
-
 //Para eliminar un pedido completo (o cliente, es lo mismo por ahora).
+
 public Restaurante BuscarPorCliente(String nombre) {
     for (int i = 0; i < Tamaño(); i++) {
         if (Obtener(i).getCliente().equalsIgnoreCase(nombre)) {
@@ -38,4 +38,13 @@ public Restaurante BuscarPorCliente(String nombre) {
     }
     return null;
 }
+//Para buscar el nombre de un cliente.
+
+public void ModificarDireccion(String nuevaDirec) {
+    for (int i = 0; i < Tamaño(); i++) {
+        Obtener(i).setDirec(nuevaDirec);
+    }
+}
+//Para modificar la dirección de un cliente.
+
 }
