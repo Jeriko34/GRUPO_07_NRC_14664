@@ -57,7 +57,7 @@ public class V1 extends JFrame implements ActionListener {
 	 */
 	public V1() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 586, 383);
+		setBounds(100, 100, 639, 528);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -141,9 +141,18 @@ public class V1 extends JFrame implements ActionListener {
 			btnModificar.setBounds(412, 8, 150, 29);
 			contentPane.add(btnModificar);
 		}
+		{
+			btnEliminar = new JButton("Eliminar pedido");
+			btnEliminar.addActionListener(this);
+			btnEliminar.setBounds(412, 48, 150, 29);
+			contentPane.add(btnEliminar);
+		}
 		
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnEliminar) {
+			do_btnEliminar_actionPerformed(e);
+		}
 		if (e.getSource() == btnModificar) {
 			do_btnNewButton_actionPerformed(e);
 		}
@@ -160,6 +169,7 @@ public class V1 extends JFrame implements ActionListener {
 	ArregloPedidos listaPedidos = new ArregloPedidos();
 	private JButton btnBuscar;
 	private JButton btnModificar;
+	private JButton btnEliminar;
 	public double obtenerPrecioPlato(int index) {
 		switch (index) {
 	     case 1: return 25.50; //Tallarines verdes
@@ -224,5 +234,53 @@ public class V1 extends JFrame implements ActionListener {
 		            r.getCliente(), r.getDirec(), total);
 		        txtS.append(linea);
 		    }
+	}
+	protected void do_btnEliminar_actionPerformed(ActionEvent e) {
+		try {
+			String textoPedido = txtPedido.getText().trim();
+
+			if (textoPedido.isEmpty()) {
+				JOptionPane.showMessageDialog(this, "Ingrese el número de pedido a eliminar.");
+				txtPedido.requestFocus();
+				return;
+			}
+
+			int numPedido = Integer.parseInt(textoPedido);
+
+			Restaurante encontrado = listaPedidos.Buscar(numPedido);
+
+			if (encontrado == null) {
+				JOptionPane.showMessageDialog(this, "No existe un pedido con ese número.");
+				return;
+			}
+
+			listaPedidos.Eliminar(encontrado);
+
+			txtS.setText("");
+			for (int i = 0; i < listaPedidos.Tamaño(); i++) {
+				Restaurante r = listaPedidos.Obtener(i);
+
+				String linea = String.format(
+					"N° Pedido: %d | Cliente: %s | Dirección: %s | Cantidad de platos: %.0f%n",
+					(int) r.getPedido(),
+					r.getCliente(),
+					r.getDirec(),
+					r.getPlato()
+				);
+
+				txtS.append(linea);
+			}
+
+			JOptionPane.showMessageDialog(this, "Pedido eliminado correctamente.");
+
+			txtPedido.setText("");
+			txtCliente.setText("");
+			txtDirección.setText("");
+			txtPlatos.setText("");
+			BoxLista.setSelectedIndex(0);
+
+		} catch (NumberFormatException ex) {
+			JOptionPane.showMessageDialog(this, "Ingrese un número de pedido válido.");
+		}
 	}
 }
