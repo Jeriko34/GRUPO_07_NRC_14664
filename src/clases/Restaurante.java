@@ -34,4 +34,10 @@ public String getDirec() {
 public void setDirec(String direc) {
 	this.direc = direc;
 }
+public double getTotal() {
+    return total;
+}
+public void setTotal(double total) {
+    this.total = total;
+}
 }

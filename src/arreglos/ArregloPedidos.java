@@ -40,10 +40,13 @@ public Restaurante BuscarPorCliente(String nombre) {
 }
 //Para buscar el nombre de un cliente.
 
-public void ModificarDireccion(String nuevaDirec) {
-    for (int i = 0; i < Tamaño(); i++) {
-        Obtener(i).setDirec(nuevaDirec);
+public boolean ModificarDireccion(int nPedido, String nuevaDirec) {
+    Restaurante r = Buscar(nPedido);
+    if (r != null) {
+        r.setDirec(nuevaDirec);
+        return true;
     }
+    return false;
 }
 //Para modificar la dirección de un cliente.
 

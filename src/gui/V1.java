@@ -56,6 +56,7 @@ public class V1 extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public V1() {
+		setTitle("Restaurante");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 639, 528);
 		contentPane = new JPanel();
@@ -114,7 +115,7 @@ public class V1 extends JFrame implements ActionListener {
 		}
 		{
 			txtS = new JTextArea();
-			txtS.setBounds(18, 134, 544, 202);
+			txtS.setBounds(18, 134, 597, 347);
 			contentPane.add(txtS);
 		}
 		{
@@ -190,17 +191,30 @@ public class V1 extends JFrame implements ActionListener {
             double total = precioUnitario * cantidad;
 
             Restaurante nuevoPedido = new Restaurante(nPedido, cantidad, nombre, direccion);
+            nuevoPedido.setTotal(total);
             listaPedidos.Registrar(nuevoPedido);
             
             String linea = String.format("Cliente: %s | Dirección del cliente: %s  |   Total: S/ %.2f\n", nombre, direccion, total);
             txtS.append(linea);
+            txtPedido.setText("");
+			txtCliente.setText("");
+			txtDirección.setText("");
+			txtPlatos.setText("");
+			BoxLista.setSelectedIndex(0);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Por favor, verifique que los campos  sean correctos.");
         }
 	}
 	
 	protected void do_btnLimpiar_actionPerformed(ActionEvent e) {
-        txtPedido.setText("");
+        
+		if (listaPedidos.Tamaño() == 0) {
+	        JOptionPane.showMessageDialog(null, "No hay pedidos para limpiar.",
+	            "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+	        return;
+	    }
+		
+		txtPedido.setText("");
         txtDirección.setText("");
         txtCliente.setText("");
         txtPlatos.setText("");
@@ -222,18 +236,27 @@ public class V1 extends JFrame implements ActionListener {
 	}
 	}
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
-		 String nuevaDirec = txtDirección.getText().trim();
+		
+		 int nPedido = Integer.parseInt(txtPedido.getText().trim());
+		    String nuevaDirec = txtDirección.getText().trim();
 
-		    listaPedidos.ModificarDireccion(nuevaDirec);
+		    boolean modificado = listaPedidos.ModificarDireccion(nPedido, nuevaDirec);
+
+		    if (!modificado) {
+		        JOptionPane.showMessageDialog(null, "No se encontró el pedido N°: " + nPedido,
+		            "No encontrado", JOptionPane.WARNING_MESSAGE);
+		        return;
+		    }
 
 		    txtS.setText("");
 		    for (int i = 0; i < listaPedidos.Tamaño(); i++) {
 		        Restaurante r = listaPedidos.Obtener(i);
 		        double total = obtenerPrecioPlato((int) r.getPlato());
 		        String linea = String.format("Cliente: %s | Dirección del cliente: %s | Total: S/ %.2f\n",
-		            r.getCliente(), r.getDirec(), total);
+		        	    r.getCliente(), r.getDirec(), r.getTotal());
 		        txtS.append(linea);
 		    }
+		    
 	}
 	protected void do_btnEliminar_actionPerformed(ActionEvent e) {
 		try {
