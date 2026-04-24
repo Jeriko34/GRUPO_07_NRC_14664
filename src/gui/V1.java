@@ -236,18 +236,15 @@ public class V1 extends JFrame implements ActionListener {
 	}
 	}
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
-		
-		 int nPedido = Integer.parseInt(txtPedido.getText().trim());
+		try {
+			int nPedido = Integer.parseInt(txtPedido.getText().trim());
 		    String nuevaDirec = txtDirección.getText().trim();
-
 		    boolean modificado = listaPedidos.ModificarDireccion(nPedido, nuevaDirec);
-
 		    if (!modificado) {
 		        JOptionPane.showMessageDialog(null, "No se encontró el pedido N°: " + nPedido,
 		            "No encontrado", JOptionPane.WARNING_MESSAGE);
 		        return;
 		    }
-
 		    txtS.setText("");
 		    for (int i = 0; i < listaPedidos.Tamaño(); i++) {
 		        Restaurante r = listaPedidos.Obtener(i);
@@ -256,7 +253,9 @@ public class V1 extends JFrame implements ActionListener {
 		        	    r.getCliente(), r.getDirec(), r.getTotal());
 		        txtS.append(linea);
 		    }
-		    
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "Ingrese un número de pedido válido para modificar su dirección.");
+		}
 	}
 	protected void do_btnEliminar_actionPerformed(ActionEvent e) {
 		try {
