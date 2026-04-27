@@ -18,6 +18,7 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class V1 extends JFrame implements ActionListener {
 
@@ -58,7 +59,7 @@ public class V1 extends JFrame implements ActionListener {
 	public V1() {
 		setTitle("Restaurante");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 639, 528);
+		setBounds(100, 100, 779, 561);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -115,7 +116,7 @@ public class V1 extends JFrame implements ActionListener {
 		}
 		{
 			txtS = new JTextArea();
-			txtS.setBounds(18, 134, 597, 347);
+			txtS.setBounds(18, 134, 544, 377);
 			contentPane.add(txtS);
 		}
 		{
@@ -148,6 +149,11 @@ public class V1 extends JFrame implements ActionListener {
 			btnEliminar.setBounds(412, 48, 150, 29);
 			contentPane.add(btnEliminar);
 		}
+		
+		JLabel lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setIcon(new ImageIcon(V1.class.getResource("/imagenes/Logo menú.png")));
+		lblNewLabel_4.setBounds(572, 0, 174, 173);
+		contentPane.add(lblNewLabel_4);
 		
 	}
 	public void actionPerformed(ActionEvent e) {

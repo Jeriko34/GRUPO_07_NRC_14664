@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/imagenes/Logo menú.png</name>
+			<type>1</type>
+			<location>C:/Users/lmrm0/OneDrive/Escritorio/GRUPO_07_NRC_14664/src/imagenes/Logo menú.png</location>
+		</link>
+	</linkedResources>
 </projectDescription>
