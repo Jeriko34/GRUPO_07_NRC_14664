@@ -50,4 +50,13 @@ public boolean ModificarDireccion(int nPedido, String nuevaDirec) {
 }
 //Para modificar la dirección de un cliente.
 
+/* 
+ * Modificación en ArregloPedidos
+ * ASD
+ * ASD
+ * ASD
+ * ASD
+ * ASD
+ * ASD 
+ * */
 }
