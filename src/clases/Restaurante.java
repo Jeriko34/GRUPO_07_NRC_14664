@@ -45,8 +45,6 @@ public void setTotal(double total) {
  * ASD
  * ASD
  * ASD
- * ASD
- * ASD
- * ASD 
+ * HOTFIX SUPER NECESARIO
  * */
 }
