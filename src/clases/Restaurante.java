@@ -40,4 +40,13 @@ public double getTotal() {
 public void setTotal(double total) {
     this.total = total;
 }
+/* 
+ * Modificación en ArregloPedidos
+ * ASD
+ * ASD
+ * ASD
+ * ASD
+ * ASD
+ * ASD 
+ * */
 }
