@@ -1,26 +1,40 @@
 package clases;
 
 public class Restaurante {
-private int pedido;
-private double plato, total;
+private int pedido, seleccion, cantidad;
+private double total;
 private String cliente, direc;
-public Restaurante(int pedido, double plato, String cliente, String direc) {
+public Restaurante(int pedido, int seleccion, int cantidad, double total, String cliente, String direc) {
 	this.pedido = pedido;
-	this.plato = plato;
+	this.seleccion = seleccion;
+	this.cantidad = cantidad;
+	this.total = total;
 	this.cliente = cliente;
 	this.direc = direc;
 }
-public double getPedido() {
+public int getPedido() {
 	return pedido;
 }
 public void setPedido(int pedido) {
 	this.pedido = pedido;
 }
-public double getPlato() {
-	return plato;
+public int getSeleccion() {
+	return seleccion;
 }
-public void setPlato(double plato) {
-	this.plato = plato;
+public void setSeleccion(int seleccion) {
+	this.seleccion = seleccion;
+}
+public int getCantidad() {
+	return cantidad;
+}
+public void setCantidad(int cantidad) {
+	this.cantidad = cantidad;
+}
+public double getTotal() {
+	return total;
+}
+public void setTotal(double total) {
+	this.total = total;
 }
 public String getCliente() {
 	return cliente;
@@ -34,17 +48,4 @@ public String getDirec() {
 public void setDirec(String direc) {
 	this.direc = direc;
 }
-public double getTotal() {
-    return total;
-}
-public void setTotal(double total) {
-    this.total = total;
-}
-/* 
- * Modificación en ArregloPedidos
- * ASD
- * ASD
- * ASD
- * HOTFIX SUPER NECESARIO
- * */
 }

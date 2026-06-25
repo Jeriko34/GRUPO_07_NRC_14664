@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import clases.Restaurante;
 
 public class ArregloPedidos {
+
 private ArrayList<Restaurante>rest;
+
 public ArregloPedidos() {
 	rest = new ArrayList<Restaurante>();
 }
@@ -24,12 +26,9 @@ public Restaurante Buscar(int pedido) {
 	}
 	return null;
 }
-//Para buscar un pedido.
 public void Eliminar(Restaurante x) {
 		rest.remove(x);
 }
-//Para eliminar un pedido completo (o cliente, es lo mismo por ahora).
-
 public Restaurante BuscarPorCliente(String nombre) {
     for (int i = 0; i < Tamaño(); i++) {
         if (Obtener(i).getCliente().equalsIgnoreCase(nombre)) {
@@ -38,8 +37,6 @@ public Restaurante BuscarPorCliente(String nombre) {
     }
     return null;
 }
-//Para buscar el nombre de un cliente.
-
 public boolean ModificarDireccion(int nPedido, String nuevaDirec) {
     Restaurante r = Buscar(nPedido);
     if (r != null) {
@@ -48,15 +45,7 @@ public boolean ModificarDireccion(int nPedido, String nuevaDirec) {
     }
     return false;
 }
-//Para modificar la dirección de un cliente.
-
-/* 
- * Modificación en ArregloPedidos
- * ASD
- * ASD
- * ASD
- * ASD
- * ASD
- * ASD 
- * */
+public void Limpiar() {
+    rest.clear();
+}
 }
